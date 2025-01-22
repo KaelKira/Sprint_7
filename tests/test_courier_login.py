@@ -1,5 +1,4 @@
 import json
-
 import allure
 import pytest
 from client.client import UserAPIClient
@@ -11,7 +10,7 @@ class TestCourierCreate:
     @allure.title('Курьер может авторизоваться')
     def test_courier_login_happy_pass(self):
         helper = Helpers()
-        user = helper.register_new_courier_and_return_login_password()
+        user = helper.get_courier_id()
         payload = {
             'login': user[0],
             'password': user[1]}
@@ -19,6 +18,7 @@ class TestCourierCreate:
         client = UserAPIClient()
         response = client.post_v1_courier_login(data=payload_string)
         assert response.status_code == 200 and "id" in response.text
+        client.delete_v1_courier(courier_id=user[2])
 
     @allure.title('Невозможность авторизации без соответствования требованиям')
     @allure.description('для авторизации нужно передать все обязательные поля;система вернёт ошибку, если неправильно указать логин или пароль;'

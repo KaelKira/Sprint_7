@@ -1,9 +1,7 @@
 import json
-
 import requests
 import random
 import string
-
 from client.client import UserAPIClient
 
 
@@ -46,11 +44,16 @@ class Helpers:
         return login_pass
 
     def get_courier_id(self):
+        login_pass_id = []
         log_pass = self.register_new_courier_and_return_login_password()
+        login_pass_id.append(log_pass[0])
+        login_pass_id.append(log_pass[1])
+
         payload = {
             'login': log_pass[0],
             'password': log_pass[1]}
         payload_string = json.dumps(payload)
         client = UserAPIClient()
         response = client.post_v1_courier_login(data=payload_string)
-        return response.json()['id']
+        login_pass_id.append(response.json()['id'])
+        return login_pass_id

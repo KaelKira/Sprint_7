@@ -1,5 +1,3 @@
-import json
-
 import requests
 
 class UserAPIClient:
@@ -23,3 +21,7 @@ class UserAPIClient:
     def post_v1_orders(self, path="/api/v1/orders", data=None):
         url = f"{self.host}{path}"
         return requests.post(url=url, data=data, headers=self.headers)
+
+    def delete_v1_courier(self, path="/api/v1/courier/", courier_id=None):
+        url = f"{self.host}{path}{courier_id}"
+        return requests.delete(url=url)
