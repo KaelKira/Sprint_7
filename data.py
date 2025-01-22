@@ -1,3 +1,5 @@
+HOST = 'https://qa-scooter.praktikum-services.ru'
+
 order_data_black = {
     "firstName": "Иван",
     "lastName": "Иванов",

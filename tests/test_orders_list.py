@@ -11,5 +11,5 @@ class TestOrdersList:
         helper = Helpers()
         courier_id = helper.get_courier_id()[2]
         client = UserAPIClient()
-        response = client.get_v1_orders(f'/api/v1/orders?courierId={courier_id}')
+        response = client.get_v1_orders(courier_id=courier_id)
         assert response.status_code == 200 and response.json()['orders'] == []
